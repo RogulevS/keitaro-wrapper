@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Доступ к Keitaro{% endblock %}
+{% block body %}
+<section class="panel narrow">
+  <h1>Доступ</h1>
+  <p class="lead">Ключ лежит в Keitaro: Профиль → API ключи. Документация открывается рядом с ключом. Адрес — это корень трекера, без <code>/admin_api/v1</code>.</p>
+  <form id="settings-form">
+    <label>Адрес трекера<input name="base_url" value="{{ base_url }}" placeholder="https://tracker.example" required></label>
+    <label>API-ключ<input name="api_key" type="password" placeholder="{% if has_key %}сохранён, введите новый чтобы сменить{% else %}ключ{% endif %}" autocomplete="off"></label>
+    <button type="submit">Сохранить</button>
+    <p id="settings-ok" class="ok" hidden>Сохранено</p>
+    <p id="settings-error" class="error" hidden></p>
+  </form>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="/static/settings.js"></script>
+{% endblock %}

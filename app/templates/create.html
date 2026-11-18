@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Новая кампания{% endblock %}
+{% block body %}
+<section class="panel">
+  <h1>Новая кампания</h1>
+  <p class="lead">Два потока: выбранные страны уходят на Google, все остальные — на оффер. Домен, группа и источник берутся из трекера.</p>
+  {% if not configured %}
+  <p class="warn">Сначала укажите адрес трекера и API-ключ на странице «Доступ».</p>
+  {% endif %}
+  <form id="create-form">
+    <label>Название<input name="name" required placeholder="имя кампании" {% if not configured %}disabled{% endif %}></label>
+    <label>Гео<input name="geo" required placeholder="MX, AU, RO" {% if not configured %}disabled{% endif %}></label>
+    <label>Оффер
+      <input id="offer-search" placeholder="поиск по названию или id" autocomplete="off" {% if not configured %}disabled{% endif %}>
+      <input type="hidden" name="offer_id" id="offer-id">
+      <ul id="offer-list" class="suggest" hidden></ul>
+    </label>
+    <div class="grid">
+      <label>Домен<select name="domain_id" id="domain-id" required {% if not configured %}disabled{% endif %}></select></label>
+      <label>Группа<select name="group_id" id="group-id" required {% if not configured %}disabled{% endif %}></select></label>
+      <label>Источник<select name="source_id" id="source-id" required {% if not configured %}disabled{% endif %}></select></label>
+    </div>
+    <button type="submit" {% if not configured %}disabled{% endif %}>Create</button>
+    <p id="create-error" class="error" hidden></p>
+  </form>
+  <div id="create-result" class="result" hidden></div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="/static/create.js"></script>
+{% endblock %}

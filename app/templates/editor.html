@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Редактор кампании{% endblock %}
+{% block body %}
+<section class="panel">
+  <h1>Редактор кампании</h1>
+  <p class="lead">Fetch streams читает потоки. Офферы правятся локально и попадают в Keitaro только после Push to Keitaro. Жёлтый поток ещё не опубликован.</p>
+  {% if not configured %}
+  <p class="warn">Сначала укажите адрес трекера и API-ключ на странице «Доступ».</p>
+  {% endif %}
+  <div class="row">
+    <label class="grow">Кампания
+      <select id="campaign-id" {% if not configured %}disabled{% endif %}></select>
+    </label>
+    <button type="button" id="fetch-streams" {% if not configured %}disabled{% endif %}>Fetch streams</button>
+  </div>
+  <p id="editor-error" class="error" hidden></p>
+  <div id="streams"></div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="/static/editor.js"></script>
+{% endblock %}
